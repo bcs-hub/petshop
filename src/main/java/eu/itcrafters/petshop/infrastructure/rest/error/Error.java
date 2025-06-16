@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Error {
-    SOME_ERROR_ENUM("Some error message");
+    NO_PET_EXISTS("Pet does not exit");
 
     private final String message;
 }
