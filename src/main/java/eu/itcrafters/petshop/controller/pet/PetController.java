@@ -1,5 +1,6 @@
 package eu.itcrafters.petshop.controller.pet;
 
+import eu.itcrafters.petshop.controller.pet.dto.PetInfo;
 import eu.itcrafters.petshop.infrastructure.rest.error.ApiError;
 import eu.itcrafters.petshop.controller.pet.dto.PetDto;
 import eu.itcrafters.petshop.service.pet.PetService;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,5 +30,11 @@ public class PetController {
     })
     public PetDto findPet(@PathVariable Integer petId) {
         return petService.findPet(petId);
+    }
+
+    @GetMapping("/pets")
+    @Operation(summary = "Finds all pets")
+    public List<PetInfo> findAllPets() {
+        return petService.findAllPets();
     }
 }

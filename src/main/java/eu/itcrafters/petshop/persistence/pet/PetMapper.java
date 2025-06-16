@@ -1,10 +1,10 @@
 package eu.itcrafters.petshop.persistence.pet;
 
 import eu.itcrafters.petshop.controller.pet.dto.PetDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import eu.itcrafters.petshop.controller.pet.dto.PetInfo;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PetMapper {
@@ -15,4 +15,9 @@ public interface PetMapper {
     @Mapping(source = "birthDate", target = "birthDate")
     PetDto toPetDto(Pet pet);
 
+    @InheritConfiguration(name = "toPetDto")
+    @Mapping(source = "id", target = "petId")
+    PetInfo toPetInfo(Pet pet);
+
+    List<PetInfo> toPetInfos(List<Pet> pets);
 }
