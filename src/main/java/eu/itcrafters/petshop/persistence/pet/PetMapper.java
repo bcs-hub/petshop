@@ -20,4 +20,10 @@ public interface PetMapper {
     PetInfo toPetInfo(Pet pet);
 
     List<PetInfo> toPetInfos(List<Pet> pets);
+
+    @Mapping(source = "petName", target = "name")
+    @Mapping(source = "birthDate", target = "birthDate")
+    @Mapping(source = "price", target = "price")
+    @Mapping(ignore = true, target = "petType")
+    Pet toPet(PetDto petDto);
 }
