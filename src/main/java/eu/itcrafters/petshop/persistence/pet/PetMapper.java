@@ -26,4 +26,8 @@ public interface PetMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(ignore = true, target = "petType")
     Pet toPet(PetDto petDto);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @InheritConfiguration(name = "toPet")
+    Pet updatePet(PetDto petDto, @MappingTarget Pet pet);
 }

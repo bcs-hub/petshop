@@ -23,6 +23,7 @@ public class PetDto implements Serializable {
     @NotNull
     @Size(max = 100)
     private String petName;
+
     private LocalDate birthDate;
 
     @NotNull

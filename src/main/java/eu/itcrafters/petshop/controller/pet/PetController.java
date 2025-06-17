@@ -1,8 +1,8 @@
 package eu.itcrafters.petshop.controller.pet;
 
+import eu.itcrafters.petshop.controller.pet.dto.PetDto;
 import eu.itcrafters.petshop.controller.pet.dto.PetInfo;
 import eu.itcrafters.petshop.infrastructure.rest.error.ApiError;
-import eu.itcrafters.petshop.controller.pet.dto.PetDto;
 import eu.itcrafters.petshop.service.pet.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class PetController {
+
     private final PetService petService;
 
     @PostMapping("/pet")
@@ -48,6 +49,19 @@ public class PetController {
     @Operation(summary = "Finds all pets")
     public List<PetInfo> findAllPets() {
         return petService.findAllPets();
+    }
+
+    @PutMapping("/pet/{petId}")
+    @Operation(summary = "Updates a pet", description = "If there are any null value fields, those won't get updated")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body: payload validation failed",
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "404", description = "Pet does not exit / PetType not found",
+                    content = @Content(schema = @Schema(implementation = ApiError.class)))
+    })
+    public void updatePet(@PathVariable Integer petId, @RequestBody @Valid PetDto petDto) {
+        petService.updatePet(petId, petDto);
     }
 
 
