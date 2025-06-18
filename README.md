@@ -1,0 +1,148 @@
+# Pet Shop
+
+A simple Spring Boot + HSQLDB application demonstrating a typical  
+Controller → Service → Repository architecture.  
+Use this as a reference for IT Crafters Graduation Project.
+
+---
+
+## Table of Contents
+
+1. [Description](#description)
+2. [Prerequisites](#prerequisites)
+3. [Getting Started](#getting-started)
+    - [Clone the repository](#clone-the-repository)
+    - [Build & Run (IntelliJ IDEA)](#build--run-intellij-idea)
+4. [Configuration](#configuration)
+5. [Database Initialization](#database-initialization)
+6. [Available Endpoints](#available-endpoints)
+7. [Project Structure](#project-structure)
+
+---
+
+## Description
+
+This example implements basic CRUD operations for a **Pet Shop**:
+
+- **MVP**
+    - Find a pet by ID
+    - List all pets
+    - Add a pet
+    - Update a pet
+    - Delete a pet
+
+You’ll see how layers connect, how to externalize SQL scripts (`schema.sql`, `data.sql`), and how to work with an in-memory HSQLDB.
+
+---
+
+## Prerequisites
+
+- Java 21
+- Gradle (or use the included `gradlew`)
+- IntelliJ IDEA (optional, but recommended)
+
+---
+
+## Getting Started
+
+---
+
+### Clone the repository
+
+Via IntelliJ IDEA
+
+1. Open IntelliJ IDEA.
+2. From the Welcome screen (or File menu), choose **Get from Version Control…**
+3. In the dialog that appears, paste `https://github.com/your-org/petshop.git` into the **URL** field.
+4. Select your desired local directory and click **Clone**.
+5. Once the clone completes, IntelliJ will open the project—allow it to import/reload the Gradle settings.
+
+Via command line
+```bash
+git clone https://github.com/your-org/petshop.git
+```
+
+---
+
+### Build & Run (IntelliJ IDEA)
+
+1. **Open the project**
+    - In IntelliJ IDEA, select **File ▸ Open…** and choose the project’s root folder (containing `build.gradle`).
+    - IntelliJ will automatically reload the Gradle project. If you encounter any issues, click the “Refresh” icon in the Gradle tool window to force a manual reload.
+
+2. **Run the application**
+    - In the **Project** tool window, navigate to `src/main/java/eu/itcrafters/petshop/PetshopApplication.java`.
+    - Click the green ▶︎ icon next to the `main` method, or right-click the file and choose **Run 'PetshopApplication'**.
+
+3. **Verify startup**
+    - The console should show Spring Boot starting on port 8080.
+    - Open your browser to `http://localhost:8080` to confirm the server is running.
+
+4. **Stop the server**
+    - Click the red ■ icon in the Run tool window, or press **Ctrl + F2** (Windows/Linux) or **⌘ + F2** (macOS).
+
+---
+
+## Configuration
+
+All runtime settings live in `src/main/resources/application.properties`.
+
+---
+
+## Database Initialization
+
+On startup, Spring Boot will automatically run any `schema.sql` and `data.sql` files found on the classpath (i.e. in `src/main/resources`) to build and seed your HSQLDB schema.
+
+### schema.sql
+
+- Defines your tables, constraints, indexes, etc.
+
+### data.sql
+
+- Populates your newly created tables with initial or sample data.
+- Executed immediately after `schema.sql`, so all referenced tables already exist.
+- Use it to insert lookup values, demo rows, or any seed data your application needs on startup.
+
+---
+
+## Available Endpoints
+
+| Method | Path               | Description                              |
+| ------ | ------------------ | ---------------------------------------- |
+| GET    | `/pet/{petId}`     | Retrieve a single pet by its ID          |
+| GET    | `/pets`            | List all pets in the store               |
+| POST   | `/pet`             | Create a new pet record                  |
+| PUT    | `/pet/{petId}`     | Update an existing pet’s details         |
+| DELETE | `/pet/{petId}`     | Delete a pet by its ID                   |
+
+---
+
+## Project Structure
+
+```plaintext
+petshop-project/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── eu.itcrafters.petshop/
+│   │   │       ├── controller/        # REST controllers & DTOs
+│   │   │       ├── persistence/       # JPA entities, repositories, mappers
+│   │   │       ├── service/           # Business-logic services
+│   │   │       └── PetshopApplication.java
+│   │   └── resources/
+│   │       ├── application.properties # Spring configuration
+│   │       ├── schema.sql             # DDL for HSQLDB schema
+│   │       └── data.sql               # Initial seed data
+│   └── test/
+│       └── java/
+│           └── eu.itcrafters.petshop/
+│               └── PetshopApplicationTests.java
+├── build.gradle                       # Gradle build script
+├── settings.gradle                    # Gradle settings
+├── gradlew / gradlew.bat              # Gradle wrapper
+├── .gitignore                         # Files to ignore in Git
+├── .gitattributes                     # Git attributes
+└── HELP.md                            # Project help & notes
+```
+
+---
