@@ -18,8 +18,9 @@ Use it as the starting point for your IT Crafters Graduation Project.
 4. [Swagger UI](#swagger-ui)
 5. [Configuration](#configuration)
 6. [Database Initialization](#database-initialization)
-7. [Available Endpoints](#available-endpoints)
-8. [Project Structure](#project-structure)
+7. [Database Structure](#database-structure)
+8. [Available Endpoints](#available-endpoints)
+9. [Project Structure](#project-structure)
 
 ---
 
@@ -111,6 +112,11 @@ On startup, Spring Boot will automatically run any `schema.sql` and `data.sql` f
 - Executed immediately after `schema.sql`, so all referenced tables already exist.
 - Use it to insert lookup values, demo rows, or any seed data your application needs on startup.
 
+---
+
+## Database Structure
+
+![ERD Diagram](docs/ERD.png)
 ---
 
 ## Available Endpoints
