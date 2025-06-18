@@ -9,10 +9,14 @@ import eu.itcrafters.petshop.persistence.pet.PetMapper;
 import eu.itcrafters.petshop.persistence.pet.PetRepository;
 import eu.itcrafters.petshop.persistence.pettype.PetType;
 import eu.itcrafters.petshop.persistence.pettype.PetTypeRepository;
+import eu.itcrafters.petshop.persistence.sale.Sale;
+import eu.itcrafters.petshop.persistence.sale.SaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +25,7 @@ public class PetService {
     private final PetRepository petRepository;
     private final PetMapper petMapper;
     private final PetTypeRepository petTypeRepository;
+    private final SaleRepository saleRepository;
 
     public void addPet(PetDto petDto) {
         PetType petType = getValidPetType(petDto.getPetType());
@@ -45,6 +50,13 @@ public class PetService {
         petMapper.updatePet(petDto, pet);
         pet.setPetType(petType);
         petRepository.save(pet);
+    }
+
+    @Transactional
+    public void deletePet(Integer petId) {
+        Pet pet = getValidPet(petId);
+        saleRepository.findSaleBy(pet).ifPresent(sale -> saleRepository.delete(sale));
+        petRepository.delete(pet);
     }
 
     private Pet getValidPet(Integer petId) {
