@@ -9,14 +9,12 @@ import eu.itcrafters.petshop.persistence.pet.PetMapper;
 import eu.itcrafters.petshop.persistence.pet.PetRepository;
 import eu.itcrafters.petshop.persistence.pettype.PetType;
 import eu.itcrafters.petshop.persistence.pettype.PetTypeRepository;
-import eu.itcrafters.petshop.persistence.sale.Sale;
 import eu.itcrafters.petshop.persistence.sale.SaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,9 +26,7 @@ public class PetService {
     private final SaleRepository saleRepository;
 
     public void addPet(PetDto petDto) {
-        PetType petType = getValidPetType(petDto.getPetType());
-        Pet pet = petMapper.toPet(petDto);
-        pet.setPetType(petType);
+        Pet pet = createPetFrom(petDto);
         petRepository.save(pet);
     }
 
@@ -45,18 +41,34 @@ public class PetService {
     }
 
     public void updatePet(Integer petId, PetDto petDto) {
-        Pet pet = getValidPet(petId);
-        PetType petType = getValidPetType(petDto.getPetType());
-        petMapper.updatePet(petDto, pet);
-        pet.setPetType(petType);
+        Pet pet = createUpdatedPetFrom(petId, petDto);
         petRepository.save(pet);
     }
 
     @Transactional
     public void deletePet(Integer petId) {
         Pet pet = getValidPet(petId);
-        saleRepository.findSaleBy(pet).ifPresent(sale -> saleRepository.delete(sale));
+        deleteAssociatedSaleIfAny(pet);
         petRepository.delete(pet);
+    }
+
+    private Pet createPetFrom(PetDto petDto) {
+        PetType petType = getValidPetType(petDto.getPetType());
+        Pet pet = petMapper.toPet(petDto);
+        pet.setPetType(petType);
+        return pet;
+    }
+
+    private Pet createUpdatedPetFrom(Integer petId, PetDto petDto) {
+        Pet pet = getValidPet(petId);
+        PetType petType = getValidPetType(petDto.getPetType());
+        petMapper.updatePet(petDto, pet);
+        pet.setPetType(petType);
+        return pet;
+    }
+
+    private void deleteAssociatedSaleIfAny(Pet pet) {
+        saleRepository.findSaleBy(pet).ifPresent(sale -> saleRepository.delete(sale));
     }
 
     private Pet getValidPet(Integer petId) {

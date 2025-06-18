@@ -25,4 +25,5 @@ public class HsqlServerConfig {
         log.info("Starting HSQLDB server on port 9001 (in-memory database 'mydb')");
         return server;
     }
+
 }

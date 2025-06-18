@@ -64,7 +64,6 @@ public class PetController {
         petService.updatePet(petId, petDto);
     }
 
-
     @DeleteMapping("/pet/{petId}")
     @Operation(summary = "Deletes a pet by its ID",
             description = "Also checks if any sales record exist with this pet. If yes, sale record is deleted")

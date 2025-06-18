@@ -30,4 +30,5 @@ public interface PetMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @InheritConfiguration(name = "toPet")
     Pet updatePet(PetDto petDto, @MappingTarget Pet pet);
+
 }
