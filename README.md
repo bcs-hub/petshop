@@ -8,8 +8,6 @@ Use it as the starting point for your IT Crafters Graduation Project.
 
 ---
 
----
-
 ## Table of Contents
 
 1. [Description](#description)
