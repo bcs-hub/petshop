@@ -1,8 +1,12 @@
 # Pet Shop
 
-A simple Spring Boot + HSQLDB application demonstrating a typical  
-Controller → Service → Repository architecture.  
-Use this as a reference for IT Crafters Graduation Project.
+A simple Spring Boot + HSQLDB application that simulates a small pet store’s inventory management.  
+You can browse pet types, add new pets, update existing records—all against an in-memory HyperSQL database.
+
+This reference project demonstrates a clean Controller → Service → Repository layering, externalized SQL scripts (`schema.sql`, `data.sql`), and IntelliJ-friendly setup.  
+Use it as the starting point for your IT Crafters Graduation Project.
+
+---
 
 ---
 
