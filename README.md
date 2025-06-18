@@ -13,10 +13,11 @@ Use this as a reference for IT Crafters Graduation Project.
 3. [Getting Started](#getting-started)
     - [Clone the repository](#clone-the-repository)
     - [Build & Run (IntelliJ IDEA)](#build--run-intellij-idea)
-4. [Configuration](#configuration)
-5. [Database Initialization](#database-initialization)
-6. [Available Endpoints](#available-endpoints)
-7. [Project Structure](#project-structure)
+4. [Swagger UI](#swagger-ui)
+5. [Configuration](#configuration)
+6. [Database Initialization](#database-initialization)
+7. [Available Endpoints](#available-endpoints)
+8. [Project Structure](#project-structure)
 
 ---
 
@@ -76,13 +77,18 @@ git clone https://github.com/your-org/petshop.git
 
 3. **Verify startup**
     - The console should show Spring Boot starting on port 8080.
-    - Open your browser to `http://localhost:8080` to confirm the server is running.
+    - Open your browser to Swagger UI page `http://localhost:8080/swagger-ui/index.html` to confirm the server is running.
 
 4. **Stop the server**
     - Click the red ■ icon in the Run tool window, or press **Ctrl + F2** (Windows/Linux) or **⌘ + F2** (macOS).
 
 ---
 
+## Swagger UI
+
+After startup, you can browse your OpenAPI docs at: `http://localhost:8080/swagger-ui/index.html`
+
+---
 ## Configuration
 
 All runtime settings live in `src/main/resources/application.properties`.
