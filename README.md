@@ -57,13 +57,13 @@ Via IntelliJ IDEA
 
 1. Open IntelliJ IDEA.
 2. From the Welcome screen (or File menu), choose **Get from Version Control…**
-3. In the dialog that appears, paste `https://github.com/your-org/petshop.git` into the **URL** field.
+3. In the dialog that appears, paste `https://github.com/bcs-hub/petshop.git` into the **URL** field.
 4. Select your desired local directory and click **Clone**.
 5. Once the clone completes, IntelliJ will open the project—allow it to import/reload the Gradle settings.
 
 Via command line
 ```bash
-git clone https://github.com/your-org/petshop.git
+git clone https://github.com/bcs-hub/petshop.git
 ```
 
 ---
